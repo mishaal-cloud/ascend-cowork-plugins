@@ -1,0 +1,14 @@
+{
+  "name": "ascend-plugins",
+  "description": "Ascend GTM plugins for Claude Cowork and Claude Code — operator doctrine, context injection, and GTM workflow skills",
+  "owner": {
+    "name": "Mishaal Murawala"
+  },
+  "plugins": [
+    {
+      "name": "ascend-gtm-operator",
+      "source": "./plugins/ascend-gtm-operator",
+      "description": "Ascend GTM operator doctrine — session-start context injection + /ascend-doctrine skill for Claude Cowork"
+    }
+  ]
+}
