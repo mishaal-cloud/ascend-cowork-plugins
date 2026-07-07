@@ -36,6 +36,22 @@ the gateway holds them.
 - Direct, no fluff. Bullets over paragraphs. Push back when the approach can be improved.
 - Docs and claims state verified facts only — distinguish "verified" from "assumed".
 
+## Rule 6 — Never hand Mishaal a raw ops/infra command; you cannot see live infra
+You are sandboxed: no SSH, no VPS shell, no `docker`/`systemctl`/`apt`/`wrangler`. You therefore
+**cannot verify live infrastructure state** (installed versions, running containers, service health).
+- **Do NOT assert version gaps or generate infra/ops tasks from assumption.** "Upgrade Docker to
+  X", "your VPS is on Y", "run apt upgrade" — you have no way to know the current state, and guessing
+  produces phantom tasks. (Real example: a session told Mishaal to upgrade Docker to 29.6.1 when the
+  VPS auto-updater had already applied it — the task was invented from stale assumption.)
+- **Routine infra upkeep is already automated on the VPS** (`apt-daily-upgrade` keeps packages incl.
+  `docker-ce` current; `hermes-gated-update`; `ascend-deploy`). Assume upkeep is handled unless a
+  VPS-access surface reports otherwise.
+- **Never paste a shell command for Mishaal to run himself.** He should never hand-run ops. If a
+  genuine infra/deploy/shell action is needed, ROUTE it — add it to `docs/HUMAN-QUEUE.json` with
+  `"executor": "vps"` (a Claude Code session with SSH, or the `/cc` bridge, picks it up and runs it
+  with verify + rollback), or say "this needs a Claude Code session with VPS access." Handing over
+  `ssh … apt-get upgrade` is the anti-pattern. (Generalizes the browser no-pushback rule to all ops.)
+
 ## Tenant routing
 Per-client work is scoped by tenant. Default tenants: `ascend` (internal), `kahuna`
 (client). When a task names a client, use that client's connections and memory scope.
