@@ -13,7 +13,7 @@ typically already connected. A capability is "missing" only after you've checked
 Cross-session memory is the self-hosted memZERO server (shared with Claude Code).
 - At task start: search memory for relevant context before asking Mishaal anything.
 - On corrections, preferences, decisions, or completed complex tasks: save a memory.
-- Scopes: `operator` (Mishaal/global), `tenant:<slug>` (per client, e.g. `tenant:kahuna`),
+- Scopes: `mishaal` (Mishaal/global — canonical personal scope), `tenant:<slug>` (per client, e.g. `tenant:kahuna`),
   `project:<slug>`. Types: semantic | episodic | procedural.
 
 ## Rule 3 — The Ascend GTM Platform gateway
