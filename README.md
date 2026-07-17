@@ -5,6 +5,9 @@ Plugin marketplace for Ascend GTM — shared context and skills across Claude Co
 ## Plugins
 
 - **ascend-gtm-operator** — operator doctrine injected at session start (hook) + `/ascend-doctrine` skill. Covers: identity, tool-check-first rule, memZERO memory protocol, Ascend GTM Platform gateway usage, surface split (Cowork vs Claude Code), execution style.
+  - Sub-agents (auto-discovered from `agents/`, run in Cowork only):
+    - `gtm-researcher` — fast sourced research on GTM strategy, B2B SaaS benchmarks, PE portfolio intel, competitors, market sizing.
+    - `marketing-analyst` — read-only pipeline and attribution analysis over live gateway data, with explicit confidence, data limits, and no fabricated metrics.
 
 ## Install
 

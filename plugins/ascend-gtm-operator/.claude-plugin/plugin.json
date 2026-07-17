@@ -1,7 +1,7 @@
 {
   "name": "ascend-gtm-operator",
-  "description": "Ascend GTM operator doctrine for Claude Cowork — identity, tool-check-first rule, memZERO memory protocol, gateway usage, execution style. Injected at session start via hook; also available as the /ascend-doctrine skill.",
-  "version": "1.0.0",
+  "description": "Ascend GTM operator doctrine for Claude Cowork — identity, tool-check-first rule, memZERO memory protocol, gateway usage, execution style. Injected at session start via hook; also available as the /ascend-doctrine skill. Bundles the gtm-researcher and marketing-analyst sub-agents.",
+  "version": "1.1.0",
   "author": {
     "name": "Mishaal Murawala"
   }
