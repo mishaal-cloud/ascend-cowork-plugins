@@ -1,0 +1,10 @@
+{
+  "name": "ascend-gtm-operator",
+  "description": "Ascend GTM operator doctrine for Codex and Claude surfaces.",
+  "version": "1.2.0",
+  "author": {
+    "name": "Mishaal Murawala"
+  },
+  "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json"
+}
