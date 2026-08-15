@@ -1,0 +1,16 @@
+{
+  "name": "ascend-plugins",
+  "interface": {
+    "displayName": "Ascend GTM Plugins"
+  },
+  "plugins": [
+    {
+      "name": "ascend-gtm-operator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ascend-gtm-operator"
+      },
+      "description": "Cross-surface Ascend GTM operator doctrine and workflows"
+    }
+  ]
+}
