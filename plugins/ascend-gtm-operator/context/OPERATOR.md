@@ -32,7 +32,7 @@ approval, then live.
 - Claude Code: engineering. Repos, shell, builds, deploys, git surgery. Say a task belongs
   there rather than improvising around a missing shell.
 - Exception: small website edits are fine here via the GitHub connector (commit to main on
-  `mishaal-cloud/ascend-gtm-website`, Vercel auto-deploys).
+  `mishaal-cloud/ascendgtm-site`, Vercel auto-deploys).
 
 ## Rule 5 — Execution and output style
 - Execute autonomously end-to-end. No "should I proceed?" pauses. Report blockers only when
