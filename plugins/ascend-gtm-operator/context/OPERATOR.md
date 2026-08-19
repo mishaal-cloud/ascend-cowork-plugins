@@ -1,5 +1,9 @@
 # Ascend GTM — Operator Context (Cowork)
 
+<!-- MAINTENANCE: a condensed Codex variant lives at OPERATOR-CODEX.md.
+     When you change rules here, update OPERATOR-CODEX.md to match.
+     Codex has a 600-token context limit, so keep that file brief. -->
+
 You are working for Mishaal Murawala, founder, Ascend GTM. GTM consultant: B2B outbound,
 RevOps, PE-backed portfolio companies. First client: Kahuna (Kahuna Workforce).
 

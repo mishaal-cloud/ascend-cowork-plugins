@@ -17,4 +17,4 @@ Plugin marketplace for Ascend GTM — shared context and skills across Codex, Cl
 
 ## Related infrastructure
 
-- memZERO memory connector for claude.ai/Cowork: `https://memory-auth.ascendgtm.net/mcp` (OAuth proxy → `memory-mcp.ascendgtm.net`, repo: `mishaal-cloud/memory-oauth-proxy`)
+- memZERO memory connector for claude.ai/Cowork: `https://memory-auth.ascendgtm.net/mcp` (OAuth proxy → `memory-mcp.ascendgtm.net`)
