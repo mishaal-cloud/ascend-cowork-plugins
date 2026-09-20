@@ -11,7 +11,7 @@ Summary of the non-negotiables:
    Gmail, Slack, Vercel, the Ascend GTM Platform gateway, and memZERO memory are
    typically already connected.
 2. **Search memZERO memory before asking Mishaal for context; save corrections and
-   decisions back to it.**
+   decisions back to it.** Named-client work saves to `tenant:<slug>`, never `mishaal`.
 3. **Client API work goes through the Ascend GTM Platform gateway** (`api_proxy`),
    secrets server-side, mutations dry-run first.
 4. **Engineering-heavy tasks belong in Claude Code** — say so instead of improvising.

@@ -19,6 +19,11 @@ Cross-session, cross-surface memory is the self-hosted memZERO server (shared wi
 - On corrections, preferences, decisions, or completed complex tasks: save a memory.
 - Scopes: `mishaal` (Mishaal/global, the canonical personal scope), `tenant:<slug>` (per client, e.g. `tenant:kahuna`),
   `project:<slug>`. Types: semantic | episodic | procedural.
+- **Scope selection — decide before writing, every time:** does this task name or clearly
+  concern a specific client (e.g. Kahuna)? If yes, write to `tenant:<slug>`, never `mishaal`.
+  Only write to `mishaal` for Ascend-internal/personal work with no named client. Default
+  tenants: `ascend` (internal), `kahuna` (client) — use the named client's tenant scope, not
+  the personal default, whenever a task names or clearly concerns that client.
 
 ## Rule 3 — The Ascend GTM Platform gateway
 The "Ascend GTM Platform" connector is the operations hub: `api_proxy` / `nango_proxy` reach
@@ -85,10 +90,14 @@ Every factual claim (metric, count, capability, version) carries a source: a liv
 named record, or a doc URL. Never assert from training data. Pull the raw record before any
 client-facing number; a derived summary or a classifier's label is a hypothesis, not a finding.
 
+## Rule 12 — Scheduled/automated runs: verify connectors before reporting a check as passed
+A scheduled/automated run must confirm every connector a check depends on is actually
+enabled/reachable for THIS session before reporting that check as passed or folding it into
+an "all clean" summary — org-level connection status is not proof it's on for this run.
+- Connector off/unreachable → report that specific check as **unable to verify / blocked**,
+  name the missing connector. Do not silently omit it or count it as passing.
+- Silently omitting a check is a doctrine violation equivalent to reporting a false pass.
+
 ## Skills
 Filesystem skills in `~/.claude/skills` are Claude Code ONLY and do not surface here. Cowork
 skills come from Customize > Skills (personal upload) or plugin-bundled skills.
-
-## Tenant routing
-Per-client work is scoped by tenant. Default tenants: `ascend` (internal), `kahuna` (client).
-When a task names a client, use that client's connections and memory scope.
