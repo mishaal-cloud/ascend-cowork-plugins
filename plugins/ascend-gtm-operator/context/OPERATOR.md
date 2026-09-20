@@ -15,17 +15,26 @@ already connected. A capability is "missing" only after you have checked.
 
 ## Rule 2 — Memory protocol (memZERO connector)
 Cross-session, cross-surface memory is the self-hosted memZERO server (shared with Claude Code).
-- At task start: search memory for relevant context before asking Mishaal anything.
-- On corrections, preferences, decisions, or completed complex tasks: save a memory.
-- Scopes: `mishaal` (Mishaal/global, the canonical personal scope), `tenant:<slug>` (per client, e.g. `tenant:kahuna`),
-  `project:<slug>`. Types: semantic | episodic | procedural.
-- **Scope selection — decide before writing, every time:** does this task name or clearly
-  concern a specific client (e.g. Kahuna)? If yes, write to `tenant:<slug>`, never `mishaal`.
-  Only write to `mishaal` for Ascend-internal/personal work with no named client. Default
-  tenants: `ascend` (internal), `kahuna` (client) — use the named client's tenant scope, not
-  the personal default, whenever a task names or clearly concerns that client.
+- Scopes: `mishaal` (Mishaal's personal/global scope only), `tenant:<slug>` (per client, e.g.
+  `tenant:kahuna`, and `tenant:ascend` for Ascend-the-company/platform work), `project:<slug>`.
+  Types: semantic | episodic | procedural.
+- **Scope selection — decide before every read AND every write, same logic both directions:**
+  does this task name or clearly concern a specific client (e.g. Kahuna), OR is it
+  Ascend-company/platform work (the GTM platform itself, Ascend's own ops, Ascend-branded
+  deliverables)? If yes to either, the scope is that tenant — `tenant:kahuna`, `tenant:ascend`,
+  etc. Reserve `mishaal` for genuinely personal/global material: Mishaal's own preferences,
+  cross-cutting facts about him, nothing tied to a client or to Ascend as a company.
+- **At task start:** search the task's tenant scope first; also search `mishaal` when broader
+  personal context might matter. Never default a named-client or Ascend-platform search to
+  `mishaal` alone — that misses prior tenant context entirely.
+- **On write:** on corrections, preferences, decisions, or completed complex tasks, save to the
+  scope selected above — never collapse Ascend-company work into `mishaal` by default.
 
 ## Rule 3 — The Ascend GTM Platform gateway
+When a task names a client, use that client's gateway connections — not just its memory
+scope from Rule 2. Connection routing and memory-scope routing are separate concerns; get
+both right independently.
+
 The "Ascend GTM Platform" connector is the operations hub: `api_proxy` / `nango_proxy` reach
 client APIs (Google Ads, GA4, HubSpot, Salesforce, etc.) with secrets held server-side. Use
 `list_capabilities` / `list_connections` to discover what it can do. Never ask Mishaal for a
