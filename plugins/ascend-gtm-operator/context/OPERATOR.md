@@ -15,12 +15,26 @@ already connected. A capability is "missing" only after you have checked.
 
 ## Rule 2 — Memory protocol (memZERO connector)
 Cross-session, cross-surface memory is the self-hosted memZERO server (shared with Claude Code).
-- At task start: search memory for relevant context before asking Mishaal anything.
-- On corrections, preferences, decisions, or completed complex tasks: save a memory.
-- Scopes: `mishaal` (Mishaal/global, the canonical personal scope), `tenant:<slug>` (per client, e.g. `tenant:kahuna`),
-  `project:<slug>`. Types: semantic | episodic | procedural.
+- Scopes: `mishaal` (Mishaal's personal/global scope only), `tenant:<slug>` (per client, e.g.
+  `tenant:kahuna`, and `tenant:ascend` for Ascend-the-company/platform work), `project:<slug>`.
+  Types: semantic | episodic | procedural.
+- **Scope selection — decide before every read AND every write, same logic both directions:**
+  does this task name or clearly concern a specific client (e.g. Kahuna), OR is it
+  Ascend-company/platform work (the GTM platform itself, Ascend's own ops, Ascend-branded
+  deliverables)? If yes to either, the scope is that tenant — `tenant:kahuna`, `tenant:ascend`,
+  etc. Reserve `mishaal` for genuinely personal/global material: Mishaal's own preferences,
+  cross-cutting facts about him, nothing tied to a client or to Ascend as a company.
+- **At task start:** search the task's tenant scope first; also search `mishaal` when broader
+  personal context might matter. Never default a named-client or Ascend-platform search to
+  `mishaal` alone — that misses prior tenant context entirely.
+- **On write:** on corrections, preferences, decisions, or completed complex tasks, save to the
+  scope selected above — never collapse Ascend-company work into `mishaal` by default.
 
 ## Rule 3 — The Ascend GTM Platform gateway
+When a task names a client, use that client's gateway connections — not just its memory
+scope from Rule 2. Connection routing and memory-scope routing are separate concerns; get
+both right independently.
+
 The "Ascend GTM Platform" connector is the operations hub: `api_proxy` / `nango_proxy` reach
 client APIs (Google Ads, GA4, HubSpot, Salesforce, etc.) with secrets held server-side. Use
 `list_capabilities` / `list_connections` to discover what it can do. Never ask Mishaal for a
@@ -85,10 +99,14 @@ Every factual claim (metric, count, capability, version) carries a source: a liv
 named record, or a doc URL. Never assert from training data. Pull the raw record before any
 client-facing number; a derived summary or a classifier's label is a hypothesis, not a finding.
 
+## Rule 12 — Scheduled/automated runs: verify connectors before reporting a check as passed
+A scheduled/automated run must confirm every connector a check depends on is actually
+enabled/reachable for THIS session before reporting that check as passed or folding it into
+an "all clean" summary — org-level connection status is not proof it's on for this run.
+- Connector off/unreachable → report that specific check as **unable to verify / blocked**,
+  name the missing connector. Do not silently omit it or count it as passing.
+- Silently omitting a check is a doctrine violation equivalent to reporting a false pass.
+
 ## Skills
 Filesystem skills in `~/.claude/skills` are Claude Code ONLY and do not surface here. Cowork
 skills come from Customize > Skills (personal upload) or plugin-bundled skills.
-
-## Tenant routing
-Per-client work is scoped by tenant. Default tenants: `ascend` (internal), `kahuna` (client).
-When a task names a client, use that client's connections and memory scope.
