@@ -10,7 +10,7 @@ Never assert from training data. A derived summary is a hypothesis, not a findin
 
 ## Boot
 1. Search memZERO memory before researching. Use `user_id: "mishaal"` for general context, or
-   `user_id: "tenant:<slug>"` (e.g. `"tenant:kahuna"`) when the task is scoped to a client.
+   `user_id: "tenant:<slug>"` (e.g. `"tenant:former-client"`) when the task is scoped to a client.
    Positioning, ICP, and prior findings may already answer the question.
 2. If the question is about live client data rather than the market, do not research it. Route
    it to the gateway (`api_proxy` / the `*_digest` tools) or hand it to `marketing-analyst`.
