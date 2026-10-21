@@ -14,7 +14,7 @@ client-facing figure. Never assert from training data. A derived summary or a cl
 label is a hypothesis, not a finding.
 
 ## Boot (in order, before any analysis)
-1. Search memZERO with `user_id: "tenant:<slug>"` (e.g. `"tenant:kahuna"`) and a query matching
+1. Search memZERO with `user_id: "tenant:<slug>"` (e.g. `"tenant:<client-slug>"`) and a query matching
    the task. Load prior runs, anomaly thresholds, positioning, and settled channel decisions.
    Do not re-derive what memory already settled.
 2. Call `connection_health` with `{ "tenant": "<tenant>" }` **before pulling any data**. If a

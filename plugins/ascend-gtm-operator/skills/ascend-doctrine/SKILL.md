@@ -1,6 +1,6 @@
 ---
 name: ascend-doctrine
-description: Ascend GTM operating doctrine — Mishaal's identity, tool-check-first rule, memZERO memory protocol, gateway usage, and execution style. Load at the start of any Ascend GTM task, client work (Kahuna), or when unsure what tools/access are available.
+description: Ascend GTM operating doctrine — Mishaal's identity, tool-check-first rule, memZERO memory protocol, gateway usage, and execution style. Load at the start of any Ascend GTM task, client work, or when unsure what tools/access are available.
 ---
 
 Read and follow the operator context at `${CLAUDE_PLUGIN_ROOT}/context/OPERATOR.md`.
