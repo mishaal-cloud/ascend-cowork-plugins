@@ -5,7 +5,7 @@ Plugin marketplace for Ascend GTM — shared context and skills across Codex, Cl
 ## Plugins
 
 - **ascend-gtm-operator** — surface-specific operator doctrine injected at session start plus the `ascend-doctrine` skill. Codex uses `.codex-plugin/plugin.json` and `OPERATOR-CODEX.md`; Claude retains its existing Cowork context.
-  - Sub-agents (auto-discovered from `agents/`, run in Cowork only):
+  - Sub-agents (discovered from `agents/`; supported in Cowork and Claude Code):
     - `gtm-researcher` — fast sourced research on GTM strategy, B2B SaaS benchmarks, PE portfolio intel, competitors, market sizing.
     - `marketing-analyst` — read-only pipeline and attribution analysis over live gateway data, with explicit confidence, data limits, and no fabricated metrics.
 
