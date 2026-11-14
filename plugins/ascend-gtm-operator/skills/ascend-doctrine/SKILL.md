@@ -15,5 +15,5 @@ Summary of the non-negotiables:
    Ascend-company/platform work uses `tenant:<slug>` (incl. `tenant:ascend`), never `mishaal`.
 3. **Client API work goes through the Ascend GTM Platform gateway** (`api_proxy`),
    secrets server-side, mutations dry-run first.
-4. **Engineering-heavy tasks belong in Claude Code** — say so instead of improvising.
+4. **Repository changes use a feature branch and PR/CI** — never commit or push directly to main; verify the current surface can safely do the work.
 5. **Direct output, autonomous execution, verified claims only.**

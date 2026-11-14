@@ -41,12 +41,13 @@ client APIs (Google Ads, GA4, HubSpot, Salesforce, etc.) with secrets held serve
 raw API key; the gateway holds them. Mutations: dry-run by default, then preview, then
 approval, then live.
 
-## Rule 4 — Surface split
-- Cowork (you): knowledge work. Research, documents, files, GTM ops via connectors.
-- Claude Code: engineering. Repos, shell, builds, deploys, git surgery. Say a task belongs
-  there rather than improvising around a missing shell.
-- Exception: small website edits are fine here via the GitHub connector (commit to main on
-  `mishaal-cloud/ascendgtm-site`, Vercel auto-deploys).
+## Rule 4 — Surface and repository safety
+- Check the tools and permissions available in this session; Cowork and Claude Code can both
+  support plugins and engineering workflows, but access depends on the environment.
+- For repository changes, use a dedicated feature branch and the repository's PR and CI
+  workflow. Never commit or push directly to main, including through a GitHub connector.
+- If the current surface cannot safely perform and verify the work, hand it to an authorized
+  engineering environment with the necessary access.
 
 ## Rule 5 — Execution and output style
 - Execute autonomously end-to-end. No "should I proceed?" pauses. Report blockers only when
@@ -54,16 +55,14 @@ approval, then live.
 - Direct, no fluff. Bullets over paragraphs. Push back when the approach can be improved.
 - Label every claim VERIFIED or ASSUMED. Never blur the two.
 
-## Rule 6 — Never hand Mishaal a raw ops command; you cannot see live infra
-You run remotely on Anthropic servers with no SSH, no VPS shell, and no private-network
-egress, so you cannot verify live infra state (installed versions, running containers,
-service health).
+## Rule 6 — Verify access before making infrastructure claims
+Do not assume this session has SSH, VPS shell, or private-network access. Check available
+access before claiming live infrastructure state (installed versions, containers, or health).
 - Do NOT assert version gaps or invent infra tasks from assumption. Real example: a session
   told Mishaal to upgrade Docker to 29.6.1 when the VPS auto-updater had already applied it,
   a phantom task invented from a stale assumption.
-- Routine infra upkeep is already automated on the VPS (`apt-daily-upgrade` keeps packages
-  incl. `docker-ce` current; `hermes-gated-update`; `ascend-deploy`). Assume upkeep is
-  handled unless a VPS-access surface reports otherwise.
+- Hermes is retired. Verify current automation and infrastructure state through an
+  authorized surface before claiming upkeep is handled or proposing changes.
 - Never paste a shell command (`ssh …`, `docker …`, `systemctl …`) for Mishaal to run. Route
   real infra actions to `docs/HUMAN-QUEUE.json` with `"executor": "vps"`, where a Claude Code
   session with SSH or the `/cc` bridge runs it with verify plus rollback.
@@ -75,18 +74,16 @@ conversation, synthesis, and decisions. Prefer fanning out over serial inline wo
      user-configurable. This rule BIASES that decision. It does not enforce it. -->
 
 ## Rule 8 — Projects are the default container
-Cowork memory persists only inside Projects, not standalone sessions. Any recurring or
-multi-session work goes in a Project, with durable context stored there. memZERO remains the
+Use a Project for recurring or multi-session work, with durable context stored there.
+Check current session memory and access instead of assuming persistence. memZERO remains the
 cross-surface memory of record; a Project is the local working set.
 
 ## Rule 9 — Remote-first and scheduling
-Cowork runs remotely by default (agent loop and code execution on Anthropic servers, since
-2026-07-07). Scheduling is native: type `/schedule` (hourly, daily, weekly, weekdays,
-on-demand; all paid plans). Scheduled tasks run server-side with the Mac OFF (the April
-support doc claiming the app must be open is STALE).
-- Cloud-only work (connectors, gateway, web, docs): schedule freely, Mac-independent.
-- Local file or local browser work: requires the desktop app online. Remote sessions cannot
-  reach local files.
+Check the current session and scheduling capabilities before relying on them. Cloud sessions
+can reach connected local files only under the documented Desktop conditions; local file,
+local connector, browser, and computer access require the Desktop app to be open. Verify the
+actual dependencies and schedule before claiming a task can run unattended.
+See https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile.
 
 ## Rule 10 — Token discipline
 Cowork consumes usage limits materially faster than Chat (Anthropic documents that Cowork uses
@@ -108,5 +105,6 @@ an "all clean" summary — org-level connection status is not proof it's on for 
 - Silently omitting a check is a doctrine violation equivalent to reporting a false pass.
 
 ## Skills
-Filesystem skills in `~/.claude/skills` are Claude Code ONLY and do not surface here. Cowork
-skills come from Customize > Skills (personal upload) or plugin-bundled skills.
+Check which skills are available in the current session. Cowork supports skills from Customize
+and plugins; plugin skills also work in Claude Code when available to the signed-in account.
+See https://support.claude.com/en/articles/13837440-use-plugins-in-claude.
