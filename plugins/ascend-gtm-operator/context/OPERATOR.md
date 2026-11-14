@@ -61,9 +61,8 @@ access before claiming live infrastructure state (installed versions, containers
 - Do NOT assert version gaps or invent infra tasks from assumption. Real example: a session
   told Mishaal to upgrade Docker to 29.6.1 when the VPS auto-updater had already applied it,
   a phantom task invented from a stale assumption.
-- Routine infra upkeep is already automated on the VPS (`apt-daily-upgrade` keeps packages
-  incl. `docker-ce` current; `hermes-gated-update`; `ascend-deploy`). Assume upkeep is
-  handled unless a VPS-access surface reports otherwise.
+- Hermes is retired. Verify current automation and infrastructure state through an
+  authorized surface before claiming upkeep is handled or proposing changes.
 - Never paste a shell command (`ssh …`, `docker …`, `systemctl …`) for Mishaal to run. Route
   real infra actions to `docs/HUMAN-QUEUE.json` with `"executor": "vps"`, where a Claude Code
   session with SSH or the `/cc` bridge runs it with verify plus rollback.
